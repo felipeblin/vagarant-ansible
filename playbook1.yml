@@ -1,0 +1,20 @@
+---
+  
+- hosts: server
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+  - name: 1. Install Latest version HTTP/Apache RPMs
+    yum: name=httpd state=present
+
+  - name: 2. Copy the Standard index.html file
+    copy: src=index.html dest=/var/www/html/index.html mode=0664
+  #  notify: restart httpd service
+  - name: Start web server
+    service:
+      name: httpd
+      state: started
+
+

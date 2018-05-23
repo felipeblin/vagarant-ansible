@@ -7,3 +7,6 @@ El server apache se puede chequear con:
  1.- vagrant ssh server
  2.- sudo systemctl status httpd
  3.- exit
+ También con ip addr se puede ver la ip de la máquina
+ Después en un browser en máquina local se puede ver la página
+ de ejemplo index.html

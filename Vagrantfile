@@ -25,8 +25,9 @@ Vagrant.configure("2") do |config|
           box.vm.box ="centos/7"
         end
         box.vm.hostname = "#{hostname}"
-        ipStr = "192.168.33.#{10+i}"
-        box.vm.network "private_network", ip: ipStr
+        #ipStr = "192.168.33.#{10+i}"
+        box.vm.network "private_network", type: "dhcp"
+        #box.vm.network "private_network",ip: ipStr
         box.vm.provider :"virtualbox" do |v|
             v.memory  = 1024
             v.name = "vbox_#{hostname}"

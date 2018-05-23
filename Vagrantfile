@@ -4,7 +4,8 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-servers= ['client','server','mysql']
+servers= ['client','server','mysql1']
+#servers= ['mysql1']
 Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
@@ -12,12 +13,17 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box ="ubuntu/trusty64"
+  #config.vm.box ="centos/7"
   # "centos/7"
   config.vm.box_check_update = false
   i=0
   servers.each do |hostname|
       config.vm.define "#{hostname}" do |box|
+        if "#{hostname}" == 'mysql1' then
+          box.vm.box ="ubuntu/trusty64"
+        else
+          box.vm.box ="centos/7"
+        end
         box.vm.hostname = "#{hostname}"
         ipStr = "192.168.33.#{10+i}"
         box.vm.network "private_network", ip: ipStr
@@ -47,7 +53,7 @@ Vagrant.configure("2") do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
- 
+
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
